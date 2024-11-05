@@ -1,12 +1,13 @@
-import { webpackBundler } from '@payloadcms/bundler-webpack'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { webpackBundler } from '@payloadcms/bundler-webpack' // bundler-import
+import { mongooseAdapter } from '@payloadcms/db-mongodb' // database-adapter-import
 import { payloadCloud } from '@payloadcms/plugin-cloud'
+// import formBuilder from '@payloadcms/plugin-form-builder'
 import nestedDocs from '@payloadcms/plugin-nested-docs'
 import redirects from '@payloadcms/plugin-redirects'
 import seo from '@payloadcms/plugin-seo'
 import type { GenerateTitle } from '@payloadcms/plugin-seo/types'
 import stripePlugin from '@payloadcms/plugin-stripe'
-import { slateEditor } from '@payloadcms/richtext-slate'
+import { slateEditor } from '@payloadcms/richtext-slate' // editor-import
 import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
@@ -42,7 +43,7 @@ dotenv.config({
 export default buildConfig({
   admin: {
     user: Users.slug,
-    bundler: webpackBundler(),
+    bundler: webpackBundler(), // bundler-config
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
@@ -74,10 +75,12 @@ export default buildConfig({
       }
     },
   },
-  editor: slateEditor({}),
+  editor: slateEditor({}), // editor-config
+  // database-adapter-config-start
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),
+  // database-adapter-config-end
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
   collections: [Pages, Products, Orders, Media, Categories, Users],
   globals: [Settings, Header, Footer],
@@ -118,6 +121,7 @@ export default buildConfig({
     },
   ],
   plugins: [
+    // formBuilder({}),
     stripePlugin({
       stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',
       isTestKey: Boolean(process.env.PAYLOAD_PUBLIC_STRIPE_IS_TEST_KEY),
