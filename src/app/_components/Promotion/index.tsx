@@ -1,3 +1,5 @@
+// eslint-disable-next-line react-hooks/exhaustive-deps
+
 'use client'
 import React, { useEffect, useState } from 'react'
 
@@ -35,7 +37,7 @@ const Promotion = () => {
     return () => {
       clearInterval(timerInterval) // Cleanup the interval when the component unmounts.
     }
-  }, [targetDate])
+  }, [])
 
   return (
     <section className={classes.promotion}>
