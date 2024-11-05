@@ -4,4 +4,4 @@ const MobileNav = () => {
   return <div>index</div>
 }
 
-export default MobileNav;
+export default MobileNav
